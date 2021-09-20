@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.Tipple.APIClient.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -28,7 +30,7 @@ namespace api
         {
             services.AddControllers();
             services.AddHttpClient<IBoozeApiClient, BoozeApiClient>();
-
+            services.AddSingleton(new ApiClientConfiguration("https://www.thecocktaildb.com/api"));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
@@ -39,6 +41,14 @@ namespace api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseExceptionHandler(app =>
+            {
+                app.Run(async Context => {
+                    Context.Response.StatusCode = 500;
+                    await Context.Response.WriteAsync("There was an error in the server.Please contact the developer.");
+                
+                });
+            });
 
             //app.UseHttpsRedirection();
 

@@ -1,4 +1,5 @@
 ﻿
+using api.Tipple.APIClient.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,15 @@ namespace Tipple.APIClient
         public HttpClient _HttpClient { get; private set; }
         private const string _DefaultExceptionMessage = "Unknown error occurred";
 
-        public BoozeApiClient(HttpClient httpClient = null)
+        public BoozeApiClient(ApiClientConfiguration configuration, HttpClient httpClient = null)
         {
+            if (configuration == null)
+                throw new ArgumentNullException(nameof(configuration));
+
+            if (string.IsNullOrWhiteSpace(configuration.BaseUrl))
+                throw new ArgumentNullException(nameof(configuration.BaseUrl));
+
+            _BaseUrl = configuration.BaseUrl;
             _HttpClient = httpClient ?? throw new ArgumentNullException(nameof(httpClient));
             if (httpClient == null)
             {
@@ -38,7 +46,7 @@ namespace Tipple.APIClient
         {
             var httpRequest = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"https://www.thecocktaildb.com/api/json/v1/1/random.php"),
+                RequestUri = new Uri($"{_BaseUrl}/json/v1/1/random.php"),
                 Method = HttpMethod.Get
             };
             var Dto = await InvokeApiAsync<DrinkDetailRoot>(httpRequest, cancellationToken: cancellationToken);
@@ -62,7 +70,7 @@ namespace Tipple.APIClient
 
             var httpRequest = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"https://www.thecocktaildb.com/api/json/v1/1/filter.php?i={str}"),
+                RequestUri = new Uri($"{_BaseUrl}/json/v1/1/filter.php?i={str}"),
                 Method = HttpMethod.Get
             };
             var drinkList = await InvokeApiAsync<DrinkRoot>(httpRequest, cancellationToken: cancellationToken);
@@ -84,7 +92,7 @@ namespace Tipple.APIClient
         {
             var httpRequest = new HttpRequestMessage()
             {
-                RequestUri = new Uri($"https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i={id}"),
+                RequestUri = new Uri($"{_BaseUrl}/json/v1/1/lookup.php?i={id}"),
                 Method = HttpMethod.Get
             };
             var Dto = await InvokeApiAsync<DrinkDetailRoot>(httpRequest, cancellationToken: cancellationToken);
