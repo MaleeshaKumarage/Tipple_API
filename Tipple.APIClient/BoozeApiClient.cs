@@ -71,6 +71,7 @@ namespace Tipple.APIClient
             {
                 var tasks = drinkList.drinks.Select(a => SearchById(a.idDrink));
                 //Creates a task that will complete when all of the Task objects in an array have completed.
+                //Can be increase the process by using the API Batches - Not Implemented here
                 var res = await Task.WhenAll(tasks.ToArray());
                 cocktailListDTO.Cocktails = res.ToList();
                 cocktailListDTO.meta = new ListMetaDTO() { count = cocktailListDTO.Cocktails.Count, firstId = cocktailListDTO.Cocktails.OrderBy(a => a.Id).FirstOrDefault().Id, lastId = cocktailListDTO.Cocktails.OrderBy(a => a.Id).LastOrDefault().Id, medianIngredientCount = cocktailListDTO.Cocktails.Sum(a => a.Ingredients.Count) / cocktailListDTO.Cocktails.Count };
@@ -96,7 +97,6 @@ namespace Tipple.APIClient
                 {
                     ingrediance.Add(prop.GetValue(Dto.drinks[0]).ToString());
                 }
-
             }
 
             return new CocktailDTO { Id = Dto.drinks[0].idDrink, Name = Dto.drinks[0].strDrink, Instructions = Dto.drinks[0].strInstructions, Ingredients = ingrediance, ImageURL = Dto.drinks[0].strDrinkThumb };
@@ -111,7 +111,6 @@ namespace Tipple.APIClient
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<T>(await response.Content.ReadAsStringAsync());
-
             }
             else
             {
