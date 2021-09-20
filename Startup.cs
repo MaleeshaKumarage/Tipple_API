@@ -28,6 +28,8 @@ namespace api
         {
             services.AddControllers();
             services.AddHttpClient<IBoozeApiClient, BoozeApiClient>();
+
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

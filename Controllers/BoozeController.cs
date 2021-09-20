@@ -4,9 +4,11 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using api.Models.Response;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Tipple.APIClient;
+using Tipple.APIClient.Model;
 
 namespace api.Controllers
 {
@@ -22,12 +24,12 @@ namespace api.Controllers
         // - Unit Tests
 
         private readonly IBoozeApiClient _BoozeApiClient;
-        public BoozeController(IBoozeApiClient BoozeApiClient)
+        private readonly IMapper _Mapper;
+        public BoozeController(IBoozeApiClient BoozeApiClient, IMapper mapper)
         {
             _BoozeApiClient = BoozeApiClient;
+            _Mapper = mapper;
         }
-
-
 
         [HttpGet]
         [Route("search-ingredient/{ingredient}")]
@@ -35,14 +37,14 @@ namespace api.Controllers
         {
             var cocktailList = new CocktailList();
             var cocktailListDTO = await _BoozeApiClient.SearchByIngredient(ingredient);
-            //USE AUTOMAPPER
+            cocktailList = _Mapper.Map<CocktailList>(cocktailListDTO);
             if (cocktailListDTO.Cocktails.Count < 1)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(cocktailListDTO);
+                return Ok(cocktailList);
             }
         }
 
@@ -52,16 +54,16 @@ namespace api.Controllers
         {
             var cocktail = new Cocktail();
             var cocktailDTO = await _BoozeApiClient.GetRandomCocktail();
-            //USE AUTOMAPPER
+            cocktail = _Mapper.Map<Cocktail>(cocktailDTO);
             if (cocktailDTO == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(cocktailDTO);
+                return Ok(cocktail);
             }
-           
+
         }
     }
 }

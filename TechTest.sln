@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "api", "api.csproj", "{7D0C9BA6-1C22-4563-BAD7-AD97B0A0A01C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tipple.APIClient", "..\Tipple.APIClient\Tipple.APIClient.csproj", "{563A143B-8246-448D-97C1-5DED9D3E85E8}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tipple.Test", "..\Tipple.Test\Tipple.Test.csproj", "{1E855A28-97F5-4444-B290-FA115FAF3055}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{7D0C9BA6-1C22-4563-BAD7-AD97B0A0A01C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D0C9BA6-1C22-4563-BAD7-AD97B0A0A01C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D0C9BA6-1C22-4563-BAD7-AD97B0A0A01C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{563A143B-8246-448D-97C1-5DED9D3E85E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{563A143B-8246-448D-97C1-5DED9D3E85E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{563A143B-8246-448D-97C1-5DED9D3E85E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{563A143B-8246-448D-97C1-5DED9D3E85E8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1E855A28-97F5-4444-B290-FA115FAF3055}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E855A28-97F5-4444-B290-FA115FAF3055}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E855A28-97F5-4444-B290-FA115FAF3055}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E855A28-97F5-4444-B290-FA115FAF3055}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

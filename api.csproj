@@ -9,7 +9,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Tipple.APIClient\Tipple.APIClient.csproj" />
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     </ItemGroup>
 
 
