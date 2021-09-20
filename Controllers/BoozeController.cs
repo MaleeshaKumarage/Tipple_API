@@ -35,6 +35,7 @@ namespace api.Controllers
         {
             var cocktailList = new CocktailList();
             var cocktailListDTO = await _BoozeApiClient.SearchByIngredient(ingredient);
+            //USE AUTOMAPPER
             if (cocktailListDTO.Cocktails.Count < 1)
             {
                 return NotFound();
@@ -42,7 +43,6 @@ namespace api.Controllers
             else
             {
                 return Ok(cocktailListDTO);
-
             }
         }
 
@@ -52,6 +52,7 @@ namespace api.Controllers
         {
             var cocktail = new Cocktail();
             var cocktailDTO = await _BoozeApiClient.GetRandomCocktail();
+            //USE AUTOMAPPER
             if (cocktailDTO == null)
             {
                 return NotFound();
@@ -59,13 +60,8 @@ namespace api.Controllers
             else
             {
                 return Ok(cocktailDTO);
-
             }
-            //USE AUTOMAPPER
-
-            // TODO - Go and get a random cocktail
-            // https://www.thecocktaildb.com/api/json/v1/1/random.php
-
+           
         }
     }
 }
